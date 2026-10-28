@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Usbc2CD5J04=",
+  "success": true,
+  "projectFilePath": "/Users/johanneslindgren/Desktop/ws/OhmsLaw/OhmsLaw/OhmsLaw.csproj",
+  "expectedPackageFiles": [
+    "/Users/johanneslindgren/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.14/microsoft.aspnetcore.app.internal.assets.10.0.14.nupkg.sha512"
+  ],
+  "logs": []
+}

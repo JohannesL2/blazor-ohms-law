@@ -1,0 +1,192 @@
+.ohm-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1rem 4rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.ohm-intro { 
+    max-width: 680px; 
+    margin-bottom: 2rem; 
+}
+
+.calculator { 
+    display: grid; 
+    grid-template-columns: minmax(0, 1fr) minmax(320px, .85fr); 
+    gap: 2rem; 
+    align-items: center; 
+    padding: clamp(1rem, 4vw, 2.5rem); 
+    background: #fff;
+}
+
+.controls > label { 
+    display: block; 
+    margin-bottom: .45rem; 
+    font-weight: 700; 
+    color: #1a2638;
+}
+
+.controls select, .value-grid input { 
+    width: 100%; 
+    min-height: 2.75rem; 
+    padding: .55rem .7rem; 
+    border: 1px solid #aebbd0; 
+    border-radius: .5rem; 
+    font: inherit; 
+    background-color: #fff;
+    color: #1a2638;
+}
+
+.controls select:focus, .value-grid input:focus { 
+    outline: 3px solid rgb(23 105 224 / 20%); 
+    border-color: #1769e0; 
+}
+
+.formula-live { 
+    margin: 1.25rem 0; 
+    padding: .8rem 1rem; 
+    text-align: center; 
+    color: #124d9d; 
+    background: #edf5ff; 
+    border-radius: .6rem; 
+    font-size: 1.4rem; 
+    font-weight: 700; 
+}
+
+.value-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 1rem .85rem; 
+    align-items: end; 
+}
+
+.value-grid label { 
+    display: block; 
+    font-weight: 700; 
+    color: #1a2638;
+}
+
+.value-grid label span { 
+    display: block; 
+    margin-top: .2rem; 
+    color: #68758a; 
+    font-size: .8rem; 
+    font-weight: 400; 
+}
+
+.value-grid input { 
+    margin-top: .45rem; 
+}
+
+.value-grid input:disabled { 
+    color: #124d9d; 
+    background: #edf5ff; 
+    border-color: #bcd5f5;
+    font-weight: 700; 
+    opacity: 1;
+}
+
+.answer { 
+    margin-top: 1.25rem; 
+    padding: 1rem; 
+    border-left: 4px solid #1769e0; 
+    background: #f5f9ff; 
+    border-radius: 0 .6rem .6rem 0; 
+}
+
+.answer > span, .answer p { 
+    color: #526075; 
+}
+
+.answer strong { 
+    display: block; 
+    margin: .2rem 0; 
+    font-size: 1.55rem; 
+    color: #124d9d;
+}
+
+.answer p { 
+    margin: .25rem 0 0; 
+    font-size: .9rem; 
+}
+
+.wheel-panel { 
+    text-align: center; 
+}
+
+.ohm-wheel { 
+    width: min(100%, 470px); 
+    height: auto; 
+    overflow: visible; 
+}
+
+.wheel-ring { 
+    fill: #fff; 
+    stroke: #8798b1; 
+    stroke-width: 2; 
+}
+
+.wheel-core { 
+    fill: #1a2638;
+}
+
+.ohm-wheel line { 
+    stroke: #8798b1; 
+    stroke-width: 1.5; 
+}
+
+.ohm-wheel text { 
+    text-anchor: middle; 
+    dominant-baseline: middle; 
+    user-select: none;
+}
+
+.core-letter { 
+    fill: #fff; 
+    font-size: 1.5rem; 
+    font-weight: 700; 
+}
+
+.wheel-formula { 
+    fill: #33435c; 
+    font-size: .8rem; 
+    font-weight: 600; 
+    transition: fill .15s ease, font-size .15s ease; 
+}
+
+.wheel-formula:hover {
+    fill: #1769e0;
+}
+
+.wheel-formula.active { 
+    fill: #1769e0; 
+    font-size: .92rem; 
+    font-weight: 800; 
+}
+
+.wheel-panel > p { 
+    margin: .4rem 0 0; 
+    color: #68758a; 
+    font-size: .85rem; 
+}
+
+@media (max-width: 760px) {
+    .calculator { 
+        grid-template-columns: 1fr; 
+    }
+    .wheel-panel { 
+        order: -1;
+    }
+}
+
+@media (max-width: 440px) {
+    .value-grid { 
+        grid-template-columns: 1fr; 
+    }
+    .wheel-formula { 
+        font-size: .65rem; 
+    }
+    .wheel-formula.active { 
+        font-size: .74rem; 
+    }
+}

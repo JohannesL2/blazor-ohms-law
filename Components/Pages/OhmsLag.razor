@@ -1,0 +1,103 @@
+@page "/"
+@namespace OhmsLaw.Components.Pages
+@using OhmsLaw.Resources
+@implements IDisposable
+
+<PageTitle>@Text.Title(IsSwedish)</PageTitle>
+
+<main class="ohm-page">
+    <div style="display: flex; justify-content: flex-end; margin-bottom: 1rem;">
+        <div class="lang-toggle" style="display: inline-flex; background: #e2e8f0; border-radius: .5rem; padding: 2px;">
+            <button class="lang-btn @(IsEnglish ? "active" : "")" @onclick="() => SetLanguage(OhmsLaw.Services.LanguageService.Language.English)" style="padding: 0.3rem 0.7rem; border: none; background: @(IsEnglish ? "#1769e0" : "transparent"); color: @(IsEnglish ? "#fff" : "#333"); border-radius: 0.4rem; font-weight: 600; cursor: pointer; font-size: 0.85rem;">EN</button>
+            <button class="lang-btn @(IsSwedish ? "active" : "")" @onclick="() => SetLanguage(OhmsLaw.Services.LanguageService.Language.Swedish)" style="padding: 0.3rem 0.7rem; border: none; background: @(IsSwedish ? "#1769e0" : "transparent"); color: @(IsSwedish ? "#fff" : "#333"); border-radius: 0.4rem; font-weight: 600; cursor: pointer; font-size: 0.85rem;">SV</button>
+        </div>
+    </div>
+
+    <section class="calculator" aria-label="Ohm's law calculator">
+        <div class="controls">
+            <label for="target">@Text.SelectTarget(IsSwedish)</label>
+            <select id="target" @bind="ValdStorhet">
+                <option value="@Storhet.Spanning">@Text.OptVoltage(IsSwedish)</option>
+                <option value="@Storhet.Strom">@Text.OptCurrent(IsSwedish)</option>
+                <option value="@Storhet.Resistans">@Text.OptResistance(IsSwedish)</option>
+                <option value="@Storhet.Effekt">@Text.OptPower(IsSwedish)</option>
+            </select>
+            <p class="formula-live">@AktivFormel</p>
+
+            <div class="value-grid">
+                <div>
+                    <label for="voltage">@Text.VoltageLabel(IsSwedish) <span>@Text.UnitVolts(IsSwedish)</span></label>
+                    <input id="voltage" type="number" min="0" step="any" inputmode="decimal"
+                           @bind="Spanning" @bind:event="oninput" disabled="@ÄrFältInaktiverat(Storhet.Spanning)" />
+                </div>
+
+                <div>
+                    <label for="current">@Text.CurrentLabel(IsSwedish) <span>@Text.UnitAmps(IsSwedish)</span></label>
+                    <input id="current" type="number" min="0" step="any" inputmode="decimal"
+                           @bind="Strom" @bind:event="oninput" disabled="@ÄrFältInaktiverat(Storhet.Strom)" />
+                </div>
+
+                <div>
+                    <label for="resistance">@Text.ResistanceLabel(IsSwedish) <span>@Text.UnitOhms(IsSwedish)</span></label>
+                    <input id="resistance" type="number" min="0" step="any" inputmode="decimal"
+                           @bind="Resistans" @bind:event="oninput" disabled="@ÄrFältInaktiverat(Storhet.Resistans)" />
+                </div>
+
+                <div>
+                    <label for="power">@Text.PowerLabel(IsSwedish) <span>@Text.UnitWatts(IsSwedish)</span></label>
+                    <input id="power" type="number" min="0" step="any" inputmode="decimal"
+                           @bind="Effekt" @bind:event="oninput" disabled="@ÄrFältInaktiverat(Storhet.Effekt)" />
+                </div>
+            </div>
+
+            <div class="answer" aria-live="polite">
+                <span>@ResultatRubrik</span>
+                <strong>@Resultat</strong>
+                <p>@Forklaring</p>
+            </div>
+        </div>
+
+        <section class="wheel-panel" aria-label="Ohm's law wheel">
+            <svg class="ohm-wheel" viewBox="0 0 480 480" role="img" aria-label="Ohm's law wheel with twelve formulas">
+                <circle class="wheel-ring" cx="240" cy="240" r="220" />
+                <circle class="wheel-core" cx="240" cy="240" r="95" />
+
+                <line x1="240" y1="20" x2="240" y2="145" />
+                <line x1="460" y1="240" x2="335" y2="240" />
+                <line x1="240" y1="460" x2="240" y2="335" />
+                <line x1="20" y1="240" x2="145" y2="240" />
+                <line x1="130" y1="49" x2="193" y2="158" />
+                <line x1="350" y1="49" x2="287" y2="158" />
+                <line x1="431" y1="130" x2="322" y2="193" />
+                <line x1="431" y1="350" x2="322" y2="287" />
+                <line x1="350" y1="431" x2="287" y2="322" />
+                <line x1="130" y1="431" x2="193" y2="322" />
+                <line x1="49" y1="350" x2="158" y2="287" />
+                <line x1="49" y1="130" x2="158" y2="193" />
+
+                <text class="core-letter" x="240" y="192">U</text>
+                <text class="core-letter" x="288" y="245">R</text>
+                <text class="core-letter" x="240" y="300">P</text>
+                <text class="core-letter" x="192" y="245">I</text>
+
+                <text class="@HjulKlass("U-PI")" x="170" y="74" @onclick='() => ValjFormel("U-PI")' style="cursor:pointer">U = P / I</text>
+                <text class="@HjulKlass("U-IR")" x="240" y="112" @onclick='() => ValjFormel("U-IR")' style="cursor:pointer">U = I × R</text>
+                <text class="@HjulKlass("U-PR")" x="310" y="74" @onclick='() => ValjFormel("U-PR")' style="cursor:pointer">U = √(P × R)</text>
+
+                <text class="@HjulKlass("R-UI")" x="405" y="170" @onclick='() => ValjFormel("R-UI")' style="cursor:pointer">R = U / I</text>
+                <text class="@HjulKlass("R-PI")" x="370" y="240" @onclick='() => ValjFormel("R-PI")' style="cursor:pointer">R = P / I²</text>
+                <text class="@HjulKlass("R-UP")" x="405" y="310" @onclick='() => ValjFormel("R-UP")' style="cursor:pointer">R = U² / P</text>
+
+                <text class="@HjulKlass("P-UI")" x="310" y="405" @onclick='() => ValjFormel("P-UI")' style="cursor:pointer">P = U × I</text>
+                <text class="@HjulKlass("P-RI")" x="240" y="370" @onclick='() => ValjFormel("P-RI")' style="cursor:pointer">P = R × I²</text>
+                <text class="@HjulKlass("P-UR")" x="170" y="405" @onclick='() => ValjFormel("P-UR")' style="cursor:pointer">P = U² / R</text>
+
+                <text class="@HjulKlass("I-UR")" x="74" y="310" @onclick='() => ValjFormel("I-UR")' style="cursor:pointer">I = U / R</text>
+                <text class="@HjulKlass("I-PU")" x="110" y="240" @onclick='() => ValjFormel("I-PU")' style="cursor:pointer">I = P / U</text>
+                <text class="@HjulKlass("I-PR")" x="74" y="170" @onclick='() => ValjFormel("I-PR")' style="cursor:pointer">I = √(P / R)</text>
+            </svg>
+            <p>@Text.WheelActiveText(IsSwedish)</p>
+            <p class="wheel-hint" style="font-size: 0.85rem; color: #666; margin-top: 4px;">💡 <em>@Text.WheelHint(IsSwedish)</em></p>
+        </section>
+    </section>
+</main>
