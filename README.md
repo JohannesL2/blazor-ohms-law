@@ -2,6 +2,9 @@
 
 An interactive Ohm's law calculator built with **Blazor WebAssembly**. The app runs entirely in the browser and can be hosted as static files on GitHub Pages.
 
+<img width="500" alt="blazor-ohms-law_" src="https://github.com/user-attachments/assets/8effca92-52fe-4bcd-9486-6c2501184034" />
+
+
 ## Features
 
 - Dynamic calculator for voltage, current, resistance, and power
