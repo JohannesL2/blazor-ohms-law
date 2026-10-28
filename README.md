@@ -1,37 +1,25 @@
-# Ohms law web app
+# Ohm's law web app
 
-A interactive webapplication for **Ohms law**, using **Blazor** (.NET). Built to be simple and help you calculate using **Ohms law** that can be complicated sometimes.
+An interactive Ohm's law calculator built with **Blazor WebAssembly**. The app runs entirely in the browser and can be hosted as static files on GitHub Pages.
 
-## Functions
+## Features
 
-- **Dynamic calculator**
-- **Interactive Ohms Law wheel SVG**
+- Dynamic calculator for voltage, current, resistance, and power
+- Interactive Ohm's law formula wheel
+- English and Swedish localization
 
-## Tech stack
+## Run locally
 
-- **Framework:** Blazor (ASP.NET Core)
-- **Language:** C#, HTML, CSS
-- **Graphics:** Scalable vector graphics (SVG)
-
-## Structure
-
-```text
-OhmsLaw/
-├── Components/
-│   ├── Layout/          # Navigation and main layout
-│   └── Pages/
-│       ├── Ohmslag.razor      # UI and HTML structure
-│       ├── Ohmslag.razor.cs   # C# logic and calculations (Partial Class)
-│       └── Ohmslag.razor.css  # Component-scoped styling
-├── wwwroot/             # Static assets and CSS
-└── Program.cs           # Application entry point
-```
-
-## Try it yourself locally
+Install the .NET 10 SDK, then run:
 
 ```bash
-1. git clone
-2. cd OhmsLaw
-3. dotnet run
-4. Open your browser and navigate to the local address provided in the terminal (for example, http://localhost:5169).
+dotnet run
 ```
+
+Open the local URL printed by the command.
+
+## Deploy to GitHub Pages
+
+The workflow in `.github/workflows/deploy.yml` publishes the app whenever changes are pushed to `main`, and can also be started manually from the Actions tab. It configures the base path for the repository name and deploys the static WebAssembly files.
+
+For the first deployment, open **Settings → Pages** in the repository and set **Build and deployment → Source** to **GitHub Actions**. The site will then be available at `https://<owner>.github.io/<repository>/`.

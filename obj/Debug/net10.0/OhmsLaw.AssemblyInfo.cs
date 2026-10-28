@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OhmsLaw")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+37c4936068bdf8f201653e6665b0ffd446ec0736")]
 [assembly: System.Reflection.AssemblyProductAttribute("OhmsLaw")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OhmsLaw")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
